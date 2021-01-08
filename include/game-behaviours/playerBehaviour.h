@@ -9,6 +9,8 @@ struct playerBehaviour{
     float __shootCD;
     float __shootTimer;
     queue* __bullets;
+    vector* lives; 
+    component* comp;
 }; typedef struct playerBehaviour playerBehaviour;
 
 void player_new(gameObject* go, float speed, float shootCooldown, int maxHealth);
@@ -17,5 +19,6 @@ void player_update(component* c);
 void player_destroy(component* comp);
 void player_on_enable(component* comp);
 void player_on_disable(component* comp);
+void player_on_collision_enter(component* me, component* other);
 
 #endif

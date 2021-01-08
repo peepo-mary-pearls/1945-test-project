@@ -10,10 +10,11 @@ struct bulletBehaviour
     vec2 dir;
     vec2 __cannon_pivot;
     transform* transform;
+    struct audio_emitter* sfx;
 }; typedef struct bulletBehaviour bullet;
 
 
-bullet* bullet_new(gameObject* go, gameObject* owner, float speed, int damage, vec2 dir, vec2 cannon_pivot);
+bullet* bullet_new(gameObject* go, gameObject* owner, float speed, int damage, vec2 dir, vec2 cannon_pivot, const char* sfx_path);
 void bullet_init(component* comp);
 void bullet_update(component* comp);
 void bullet_destroy(component* comp);

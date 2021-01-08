@@ -8,6 +8,10 @@ void player_new(gameObject* go, float speed, float shootCooldown, int maxHealth)
     p->__shootTimer = shootCooldown;
     p->__maxHealth = maxHealth;
     p->__currHealth = maxHealth;
+    p->comp = c;
+
+    circle_collider_new(go, 0, player_on_collision_enter, NULL, NULL);
+    circle_collider_set_collision(go, PLAYER_MASK, ENEMY_MASK);
 
     //"Simple" bullet creation
     p->__bullets = createQueue();
@@ -16,12 +20,21 @@ void player_new(gameObject* go, float speed, float shootCooldown, int maxHealth)
         vec2 pos = vec2_new(300, 300);
         gameObject* bullGo = gameObject_new_with_coord(go->__scene, "", &pos);
         vec2 cannon_pivot = vec2_new(i % 2 == 0 ? 0 : 30, -10);
-        bullet* b = bullet_new(bullGo, go, 800, 1, vec2_new(0, -1), cannon_pivot);
+        bullet* b = bullet_new(bullGo, go, 800, 1, vec2_new(0, -1), cannon_pivot, "resources/assets/audio/snd_explosion1.wav");
         sprite_new(bullGo, "resources/assets/player/bullet.png", 0, 0, 0);
         circle_collider_new(bullGo, 0, bullet_on_enter, NULL, NULL);
         circle_collider_set_collision(bullGo, PLAYER_MASK, ENEMY_MASK);
         gameObject_set_active(bullGo, false);
         enqueue(p->__bullets, bullGo);
+    }
+
+    p->lives = vector_new();
+    for (int i = 0; i < p->__maxHealth; i++)
+    {
+        vec2 pos = vec2_new(15 + (30 *  i), 410);
+        gameObject* life = gameObject_new_with_coord(go->__scene, "life", &pos);
+        sprite_new(life, "resources/assets/ui/life.png", 0, 0, 0);
+        vector_add(p->lives, life);
     }
     
     c->data = p;
@@ -40,8 +53,7 @@ void __shoot(queue* bullets){
 }
 
 void player_init(component* comp){
-
-}
+}   
 
 void player_update(component* c){
     const Uint8* state = SDL_GetKeyboardState(NULL);
@@ -85,4 +97,23 @@ void player_on_enable(component* comp){
 
 void player_on_disable(component* comp){
 
+}
+
+boolean player_on_damage(playerBehaviour* pb, int damage){
+    if(pb == NULL) return false;
+    pb->__currHealth -= damage;
+    if(pb->__currHealth < 0){
+        game_end(pb->comp->owner->__scene->__game);
+        return true;
+    } 
+    gameObject_set_active(vector_at(pb->lives, pb->__currHealth), false);
+    return false;
+}
+
+void player_on_collision_enter(component* me, component* other){
+    if(strcmp(other->owner->name, "enemy") != 0) return;
+    playerBehaviour* pb = (playerBehaviour*)gameObject_get_component(me->owner, PLAYER_T);
+    player_on_damage(pb, 1);
+    enemy_behaviour* eb = (enemy_behaviour*)gameObject_get_component(other->owner, ENEMY_T);
+    enemy_on_damage(eb, 99);
 }

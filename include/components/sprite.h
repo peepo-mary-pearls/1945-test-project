@@ -11,14 +11,17 @@ struct sprite{
     transform* transform;
     int z_index;
     int frames;
+    int __loops;
+    int __loops_count;
     int curr_frame;
     float animationSpeed;
     float __animationTimer;
     boolean __active;
 };typedef struct sprite sprite;
 
-void sprite_new(gameObject* go, const char* path, int z_index, int w, int h);
-void sprite_new_animated(gameObject* go, const char* path, int z_index, int frames, float animationSpeed);
+sprite* sprite_new(gameObject* go, const char* path, int z_index, int w, int h);
+sprite* sprite_new_animated(gameObject* go, const char* path, int z_index, int frames, float animationSpeed);
+sprite* sprite_new_animated_loops(gameObject* go, const char* path, int z_index, int frames, float animationSpeed, int loops);
 void sprite_destroy(component* comp);
 void sprite_init(component* comp);
 void sprite_update(component* c);

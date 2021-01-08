@@ -57,6 +57,12 @@ void physics_mgr_update(physics_mgr* pm){
     physics_mgr_collisions_update(pm);
 }
 
+void physics_mgr_destroy(physics_mgr* pm){
+    vector_destroy(pm->collisions);
+    vector_destroy(pm->udatables);
+    free(pm);
+}
+
 void physics_mgr_add_updatable(physics_mgr* pm, circle_collider* updatable){
     vector_add(pm->udatables, updatable);
 }

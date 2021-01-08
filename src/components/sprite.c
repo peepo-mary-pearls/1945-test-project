@@ -29,15 +29,18 @@ sprite* __sprite_create_def(gameObject* go, const char* path, int z_index){
     return s;
 }
 
-void sprite_new(gameObject* go, const char* path, int z_index, int w, int h){
+sprite* sprite_new(gameObject* go, const char* path, int z_index, int w, int h){
     sprite* s = __sprite_create_def(go, path, z_index);
     s->dst_rect.w = w == 0 ? s->surf->w : w;
     s->dst_rect.h = h == 0 ? s->surf->h : h;
     s->frames = 0; //this is done to avoid errors
+    s->__loops = 0;
+    s->__loops_count = -1;
     SDL_FreeSurface(s->surf);
+    return s;
 }
 
-void sprite_new_animated(gameObject* go, const char* path, int z_index, int frames, float animationSpeed){
+sprite* sprite_new_animated(gameObject* go, const char* path, int z_index, int frames, float animationSpeed){
     sprite* s = __sprite_create_def(go, path, z_index);
     s->frames = frames;
     s->curr_frame = 0;
@@ -45,12 +48,22 @@ void sprite_new_animated(gameObject* go, const char* path, int z_index, int fram
     s->dst_rect.h = s->surf->h;
     s->animationSpeed = animationSpeed;
     s->__animationTimer = 0;
-    
+    s->__loops = 0;
+    s->__loops_count = -1;
+
     s->src_rect.w = s->surf->w / s->frames;
     s->src_rect.h = s->surf->h;
     s->src_rect.x = 0;
     s->src_rect.y = 0;
     SDL_FreeSurface(s->surf);
+    return s;
+}
+
+sprite* sprite_new_animated_loops(gameObject* go, const char* path, int z_index, int frames, float animationSpeed, int loops){
+    sprite* s = sprite_new_animated(go, path, z_index, frames, animationSpeed);
+    s->__loops = loops;
+    s->__loops_count = 0;
+    return s;
 }
 
 void sprite_destroy(component* comp){
@@ -66,13 +79,15 @@ void sprite_init(component* comp){
 
 void sprite_update(component* c){
     sprite* s = (sprite*)c->data;
+    if(s->__loops != 0 && s->__loops_count >= s->__loops) gameObject_set_active(c->owner, false);
     if(s->frames != 0){
-        s->__animationTimer += delta_time(c->owner->__scene);
+        s->__animationTimer += delta_time_sec(c->owner->__scene);
         if(s->__animationTimer >= s->animationSpeed){
             s->curr_frame++;
             if(s->curr_frame >= s->frames){
                 s->src_rect.x = 0;
                 s->curr_frame = 0;
+                if(s->__loops != 0) s->__loops_count++;
             }
             else
                 s->src_rect.x += s->dst_rect.w;
@@ -98,6 +113,7 @@ void sprite_recolor(sprite* s, uint r, uint g, uint b){
 void sprite_enable(component* comp){
     sprite* s = (sprite*)comp->data;
     s->__active = true;
+    s->__loops_count = 0;
 }
 
 void sprite_disable(component* comp){

@@ -29,6 +29,7 @@ struct game{
 }; typedef struct game game; 
 
 game* game_new(int width, int height);
+void game_end(game* game);
 //void add_gameObject(game* game, gameObject* go);
 int init(game* game);
 void gameLoop(game* game);
@@ -37,5 +38,8 @@ void tick(game* game);
 void clear(game* game);
 void update(game* game);
 void draw(game* game);
+
+
+void initMainMenu(game* game);
 
 #endif

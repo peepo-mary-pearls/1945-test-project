@@ -42,21 +42,21 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-Debug-af750984c15d71df26bb.json",
+					"jsonFile" : "target-ALL_BUILD-Debug-526b35d420cb9c9e24f7.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "PeepoEngine2D::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-PeepoEngine2D-Debug-5844d5f5df75ce46ce68.json",
+					"jsonFile" : "target-PeepoEngine2D-Debug-79fa2729f8bb96cc6d4b.json",
 					"name" : "PeepoEngine2D",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ZERO_CHECK-Debug-4a34401190380c582081.json",
+					"jsonFile" : "target-ZERO_CHECK-Debug-f0a23e4fcf7b7760a0fa.json",
 					"name" : "ZERO_CHECK",
 					"projectIndex" : 0
 				}
@@ -103,21 +103,21 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-Release-af750984c15d71df26bb.json",
+					"jsonFile" : "target-ALL_BUILD-Release-526b35d420cb9c9e24f7.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "PeepoEngine2D::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-PeepoEngine2D-Release-8a109fadd6a50ce91a3b.json",
+					"jsonFile" : "target-PeepoEngine2D-Release-1d129250ec94f8dcfbcb.json",
 					"name" : "PeepoEngine2D",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ZERO_CHECK-Release-4a34401190380c582081.json",
+					"jsonFile" : "target-ZERO_CHECK-Release-f0a23e4fcf7b7760a0fa.json",
 					"name" : "ZERO_CHECK",
 					"projectIndex" : 0
 				}
@@ -164,21 +164,21 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-MinSizeRel-af750984c15d71df26bb.json",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-526b35d420cb9c9e24f7.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "PeepoEngine2D::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-PeepoEngine2D-MinSizeRel-8b6a4f02820f9ffa9cf0.json",
+					"jsonFile" : "target-PeepoEngine2D-MinSizeRel-ba260a08aa2adbbd3c31.json",
 					"name" : "PeepoEngine2D",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ZERO_CHECK-MinSizeRel-4a34401190380c582081.json",
+					"jsonFile" : "target-ZERO_CHECK-MinSizeRel-f0a23e4fcf7b7760a0fa.json",
 					"name" : "ZERO_CHECK",
 					"projectIndex" : 0
 				}
@@ -225,21 +225,21 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-af750984c15d71df26bb.json",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-526b35d420cb9c9e24f7.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "PeepoEngine2D::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-PeepoEngine2D-RelWithDebInfo-8ccd280220c35a2f5017.json",
+					"jsonFile" : "target-PeepoEngine2D-RelWithDebInfo-58f876ab14e735eefc8f.json",
 					"name" : "PeepoEngine2D",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ZERO_CHECK-RelWithDebInfo-4a34401190380c582081.json",
+					"jsonFile" : "target-ZERO_CHECK-RelWithDebInfo-f0a23e4fcf7b7760a0fa.json",
 					"name" : "ZERO_CHECK",
 					"projectIndex" : 0
 				}
@@ -249,8 +249,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/filip/Desktop/3AIV/peepo-engine2d/peepo-engine-2d/build",
-		"source" : "C:/Users/filip/Desktop/3AIV/peepo-engine2d/peepo-engine-2d"
+		"build" : "C:/Users/filip/Desktop/3AIV/peepo-engine2d/1945-academy-proj/build",
+		"source" : "C:/Users/filip/Desktop/3AIV/peepo-engine2d/1945-academy-proj"
 	},
 	"version" : 
 	{

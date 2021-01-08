@@ -14,7 +14,6 @@ scene* scene_new(game* game, const char* name, void(*init)(struct game*)){
     s->draw_mgr = gfxmgr_new(s->__game->__renderer);
     s->physics_mgr = physics_mgr_new();
     s->index = vector_size(s->__game->scenes);
-    vector_add(s->__game->scenes, s);
     //s->index = vector_size(game->scenes);
     return s;
 }
@@ -39,10 +38,30 @@ scene* scene_get_by_name(game* game, const char* name){
     return NULL;
 }
 
+gameObject* scene_get_obj(scene* s, const char* name){
+    for (int i = 0; i < vector_size(s->gameObjects); i++)
+    {
+        gameObject* go = vector_at(s->gameObjects, i);
+        int res = strcmp(go->name, name);
+        if(res == 0){
+            return go;
+        }
+    }
+    return NULL;
+}
+
 void scene_init(scene* scene){
     printf("init-scene");
     scene->init(scene->__game);
     //sort items by z-index for drawing
+}
+
+void scene_init_objs(scene* s){
+    for (uint i = 0; i < vector_size(s->gameObjects); i++)
+    {
+        gameObject* go = vector_at(s->gameObjects, i);
+        gameObject_init(go);
+    }
 }
 
 void scene_update(scene* scene){
@@ -64,10 +83,12 @@ void scene_draw(scene* scene){
 void scene_destroy(scene* scene){
     vector_destroy(scene->gameObjects);
     gfxmgr_destroy(scene->draw_mgr);
+    physics_mgr_destroy(scene->physics_mgr);
     free(scene);
 }
 
 void scene_change(scene* old_scene, scene* new_scene){
+    //int size = vector_size(old_scene->gameObjects)
     for (uint i = 0; i < vector_size(old_scene->gameObjects); i++)
     {
         gameObject* go = vector_at(old_scene->gameObjects, i);

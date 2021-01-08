@@ -3,6 +3,7 @@
 //#include "SDL.h"
 #include "SDL_image.h"
 #include <stdlib.h>
+#include <string.h>
 
 enum boolean_enum { true = 1, false = 0 };
 typedef unsigned char boolean;

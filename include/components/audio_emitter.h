@@ -8,18 +8,19 @@ enum audio_extension{
 }; typedef enum audio_extension audio_extension;
 
 struct audio_emitter{
-    Mix_Chunk* audio_wav;
-    Mix_Music* audio_mp3;
+    void* audio;
     const char* path;
     int loops;
+    int volume;
     audio_extension audio_ext;
-    boolean __is_playing;
+    boolean play_on_start;
 }; typedef struct audio_emitter audio_emitter;
 
-void audio_emitter_new(gameObject* go, const char* path, int loops, audio_extension audio_ext);
+audio_emitter* audio_emitter_new(gameObject* go, const char* path, int loops, audio_extension audio_ext, int volume, boolean play_on_start);
 void audio_destroy(component* comp);
 void audio_init(component* comp);
 void audio_update(component* comp);
+void audio_play(audio_emitter* a);
 void audio_on_enable(component* comp);
 void audio_on_disable(component* comp);
 

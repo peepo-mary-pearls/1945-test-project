@@ -10,6 +10,7 @@ enum comp_type{
     PLAYER_T,
     ENEMY_T,
     ENEMY_SPAWNER_T,
+    ISLAND_SPAWNER_T,
     BULLET_T,
     TRANSFORM_T
 }; typedef enum comp_type component_type;
@@ -39,6 +40,7 @@ gameObject* gameObject_new(scene* scene, const char* name);
 gameObject* gameObject_new_with_coord(scene* scene, const char* name, vec2* pos);
 void gameObject_destroy(gameObject* go);
 void* gameObject_get_component(gameObject* go, component_type ct);
+void gameObject_init(gameObject* go);
 void gameObject_update(gameObject* go);
 void dont_destroy_on_load(gameObject* go);
 boolean gameObject_is_active(gameObject* go);

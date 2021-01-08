@@ -18,11 +18,13 @@ struct scene{
 
 scene* scene_new();
 void scene_init();
+void scene_init_objs(scene* s);
 void scene_update(scene* scene);
 void scene_draw(scene* scene);
 void scene_set_active(scene* s);
 scene* scene_get_by_index(struct game* game, int index);
 scene* scene_get_by_name(struct game* game, const char* name);
+struct gameObject* scene_get_obj(scene* s, const char* name);
 double delta_time(scene* scene);
 double delta_time_sec(scene* scene);
 double unscaled_delta_time(scene* scene);

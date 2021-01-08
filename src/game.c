@@ -115,7 +115,7 @@ void initMainMenu(game* game){
 
     //create ostObj
     go = gameObject_new(game->current_scene, "audioEmitter");
-    audio_emitter_new(go, "resources/assets/audio/background.mp3", 1, MP3);
+    audio_emitter_new(go, "resources/assets/audio/night_of_nights.mp3", -1, MP3, 80, true);
     dont_destroy_on_load(go); //avoid destroying this obj since it reproduce the main ost
     game->current_scene->started = true;
 
@@ -132,30 +132,30 @@ void OnExit(component* me, component* other){
 
 void initGameScene(game* game){
     //water-bg
+    int enviro_speed = 70;
     gameObject* go = gameObject_new(game->current_scene, "bg");
     sprite_new(go, "resources/assets/map/water-bg.png", 0, 0, 0);
+    bg_behaviour_new(go, enviro_speed);
+    vec2 bgPos = vec2_new(0, -game->height);
+    go = gameObject_new_with_coord(game->current_scene, "bg", &bgPos);
+    sprite_new(go, "resources/assets/map/water-bg.png", 0, 0, 0);
+    bg_behaviour_new(go, enviro_speed);
+
+    go = gameObject_new(game->current_scene, "islands");
+    island_spawner_new(go, 3, enviro_speed);
+
+    //enemies
+    go = gameObject_new(game->current_scene, "spawner");
+    enemy_spawner_new(go, 2);
+
+    vec2 v = vec2_new(0, 405);
+    go = gameObject_new_with_coord(game->current_scene, "UIbottom", &v);
+    sprite_new(go, "resources/assets/ui/bottom.png", -2, 0, 0);
 
     //TEST PLAYER
     go = gameObject_new(game->current_scene, "player");
     sprite_new_animated(go, "resources/assets/player/myplane_strip3.png", 1, 3, 0.1f);
     player_new(go, 200, .15, 4);
-    circle_collider_new(go, 0, OnEnter, NULL, OnExit);
-    circle_collider_set_collision(go, PLAYER_MASK, ENEMY_MASK);
-
-    //test enemy
-    // vec2 v = vec2_new(300, 150);
-    // go = gameObject_new_with_coord(game->current_scene, "enemyTest", &v);
-    // sprite_new_animated(go, "resources/assets/enemy/enemy1_strip3.png", 1, 3, 0.1f);
-    // enemy_new(go, HORIZONTAL, 50, 0, 3, NULL);
-    // circle_collider_new(go, 0, OnEnter, NULL, OnExit);
-    // circle_collider_set_collision(go, ENEMY_MASK, PLAYER_MASK);
-
-    go = gameObject_new(game->current_scene, "spawner");
-    enemy_spawner_new(go, 1);
-
-    vec2 v = vec2_new(0, 405);
-    go = gameObject_new_with_coord(game->current_scene, "UIbottom", &v);
-    sprite_new(go, "resources/assets/ui/bottom.png", -2, 0, 0);
 
     game->current_scene->started = true;
 }
@@ -186,8 +186,10 @@ void update_events(game* game, SDL_Event* event){
 void gameLoop(game* game){
 
     scene* menu = scene_new(game, "main-menu", initMainMenu);
+    vector_add(game->scenes, menu);
 
     scene* game_scene = scene_new(game, "game", initGameScene);
+    vector_add(game->scenes, game_scene);
 
     scene_set_active(menu);
     SDL_Event event;
@@ -199,6 +201,7 @@ void gameLoop(game* game){
         //if the scene changed but isn't initialized
         if(game->current_scene->started == false){
             game->current_scene->init(game);
+            scene_init_objs(game->current_scene);
         }
 
         update_events(game, &event);
@@ -251,4 +254,9 @@ int getFPS(game* game){
         float delta_time = ((float)(game->__curr_count - game->__last_count) / (float)freq);
         int fps = (int)(1.f / delta_time);
         return fps;
+}
+
+void game_end(game* game){
+    scene* menu = scene_new(game, "main-menu", initMainMenu);
+    game->next_scene = menu;
 }

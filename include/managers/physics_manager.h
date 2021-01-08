@@ -16,6 +16,7 @@ struct collision{
 
 physics_mgr* physics_mgr_new();
 void physics_mgr_update(physics_mgr* pm);
+void physics_mgr_destroy(physics_mgr* pm);
 void physics_mgr_add_updatable(physics_mgr* pm, struct circle_collider* item);
 void physics_mgr_remove_updatable(physics_mgr* pm, struct circle_collider* item);
 void physics_mgr_add_collision(physics_mgr* pm, circle_collider* cc1, circle_collider* cc2);
