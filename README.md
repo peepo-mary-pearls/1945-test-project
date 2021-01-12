@@ -1,7 +1,7 @@
 # 1945 Test Game
-Dumb test game made to stress out my first game engine
+Test game made to stress out my first game engine
   
-  
+# ABOUT THE ENGINE:
 # Peepo Engine 2D -Enhance your Peepo-
 My first dumb attempt creating a 2D engine in C with SDL
 
